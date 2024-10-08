@@ -5,7 +5,7 @@ public class MoveMonsters : MonoBehaviour
 {
     [SerializeField] private int _speed;
     private Transform _transform;
-    [SerializeField] private Transform _currentNode;
+    public Transform _currentNode;
     private void Start()
     {
         _transform = transform;
