@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &77645203
 Transform:
   m_ObjectHideFlags: 0
@@ -151,7 +151,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1411411385}
   - {fileID: 602888063}
   - {fileID: 404246145}
   - {fileID: 886681845}
@@ -240,7 +239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &330940956
 Transform:
   m_ObjectHideFlags: 0
@@ -278,7 +277,7 @@ GameObject:
   - component: {fileID: 338543380}
   - component: {fileID: 338543379}
   - component: {fileID: 338543381}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Circle 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +459,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 0
 --- !u!231 &338543381
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -493,6 +492,10 @@ PrefabInstance:
     - target: {fileID: 3003653741970149293, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
       propertyPath: m_Name
       value: Link (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3003653741970149293, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
       propertyPath: m_LocalScale.x
@@ -567,6 +570,10 @@ PrefabInstance:
     - target: {fileID: 3003653741970149293, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
       propertyPath: m_Name
       value: Link (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3003653741970149293, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
       propertyPath: m_LocalScale.x
@@ -730,6 +737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Link (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3003653741970149293, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.5
@@ -873,7 +884,7 @@ GameObject:
   - component: {fileID: 641363382}
   - component: {fileID: 641363381}
   - component: {fileID: 641363380}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Circle 4 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1127,6 +1138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Link (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3003653741970149293, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.5
@@ -1335,7 +1350,7 @@ GameObject:
   - component: {fileID: 1074301088}
   - component: {fileID: 1074301087}
   - component: {fileID: 1074301086}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Circle 4 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1549,6 +1564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1268558246}
   - component: {fileID: 1268558245}
+  - component: {fileID: 1268558247}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1569,11 +1585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
-  _radiusSphere: 2
-  _radiusSphereVerif: 0.5
-  _numberLink: 2
-  _prefabLink: {fileID: 3003653741970149293, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-  _prefabLinkPreview: {fileID: 3003653741970149293, guid: 832f21c74f513c84aa18cb1b51aaeba6, type: 3}
+  _setLink: {fileID: 1268558247}
 --- !u!4 &1268558246
 Transform:
   m_ObjectHideFlags: 0
@@ -1589,6 +1601,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1268558247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268558244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46954c1d04411d046afa2777c7f17820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 519420031}
+  _radiusSphere: 2
+  _radiusSphereVerif: 0.5
+  _numberLink: 2
+  _frequencyLink: 6
 --- !u!1 &1319930295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,7 +1633,7 @@ GameObject:
   - component: {fileID: 1319930301}
   - component: {fileID: 1319930302}
   - component: {fileID: 1319930303}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Circle 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1765,7 +1794,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 0
 --- !u!231 &1319930302
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1874,76 +1903,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9155846058114978857, guid: f9212e8e41dccac49b9d28c445b26510, type: 3}
   m_PrefabInstance: {fileID: 1377216377}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1411411384
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 77645203}
-    m_Modifications:
-    - target: {fileID: 3003653741970149293, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_Name
-      value: Link
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8099454128250542426, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-      propertyPath: m_Distance
-      value: 4.25
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
---- !u!4 &1411411385 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
-  m_PrefabInstance: {fileID: 1411411384}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1412710114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2022,6 +1981,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Link (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3003653741970149293, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -2099,7 +2062,7 @@ GameObject:
   - component: {fileID: 1667755123}
   - component: {fileID: 1667755122}
   - component: {fileID: 1667755124}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Circle 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2234,6 +2197,7 @@ MonoBehaviour:
   - {fileID: 2134276999}
   - {fileID: 1319930299}
   - {fileID: 338543377}
+  - {fileID: 641363379}
 --- !u!231 &1667755122
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2281,7 +2245,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 0
 --- !u!231 &1667755124
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2396,7 +2360,7 @@ GameObject:
   - component: {fileID: 1682214733}
   - component: {fileID: 1682214732}
   - component: {fileID: 1682214731}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Circle 4 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2747,7 +2711,7 @@ GameObject:
   - component: {fileID: 2134277002}
   - component: {fileID: 2134277001}
   - component: {fileID: 2134277003}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Circle 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2882,6 +2846,8 @@ MonoBehaviour:
   - {fileID: 1667755120}
   - {fileID: 1319930299}
   - {fileID: 338543377}
+  - {fileID: 641363379}
+  - {fileID: 1682214730}
 --- !u!231 &2134277001
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -2929,7 +2895,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 3
+  m_Constraints: 0
 --- !u!231 &2134277003
 SpringJoint2D:
   m_ObjectHideFlags: 0

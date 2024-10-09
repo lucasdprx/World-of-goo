@@ -19,7 +19,7 @@ public class MoveMonsters : MonoBehaviour
         _transform.position = Vector3.MoveTowards(_transform.position, _currentNode.position, _speed * Time.fixedDeltaTime);
         if (_transform.position == _currentNode.position)
         {
-            List<Transform> _links = _currentNode.GetComponent<Link>()._links;
+            List<Transform> _links = _currentNode.GetComponent<List_Link>()._links;
             _currentNode = _links[Random.Range(0, _links.Count)];
         }
     }
