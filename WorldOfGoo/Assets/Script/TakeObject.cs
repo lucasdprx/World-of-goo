@@ -10,9 +10,24 @@ public class TakeObject : MonoBehaviour
     private bool _isTake = false;
 
     [SerializeField] private float _radiusSphere;
-    private Collider2D[] node;
+    [SerializeField] private float _radiusSphereVerif;
+    private Collider2D[] _node;
 
-    [SerializeField] private GameObject prefabLink;
+    [SerializeField] private int _numberLink;
+
+    [SerializeField] private GameObject _prefabLink;
+    [SerializeField] private GameObject _prefabLinkPreview;
+
+    private List<GameObject> _linkPreview = new();
+    private void Start()
+    {
+        for (int i = 0; i < _numberLink; i++)
+        {
+            GameObject linkPreview = Instantiate(_prefabLinkPreview);
+            _linkPreview.Add(linkPreview);
+        }
+        EnableLinkPreview(false);
+    }
     void Update()
     {
         if (_isTake)
@@ -25,6 +40,9 @@ public class TakeObject : MonoBehaviour
         Vector3 position = _camera.ScreenToWorldPoint(Input.mousePosition);
         position.z = 0;
         _objectTake.transform.position = position;
+
+        Collider2D[] nodeClosest = Physics2D.OverlapCircleAll(position, _radiusSphere);
+        SortCollider(nodeClosest, _objectTake.transform.position);
     }
 
     public void LeftClick(InputAction.CallbackContext ctx)
@@ -37,16 +55,15 @@ public class TakeObject : MonoBehaviour
                 return;
 
             if (hit.collider.GetComponent<MoveMonsters>() == null)
-            {
                 return;
-            } 
             
-            if (hit.collider.GetComponent<MoveMonsters>().enabled)
-            {
-                hit.collider.GetComponent<MoveMonsters>().enabled = false;
-                _objectTake = hit.collider.gameObject;
-                _isTake = true;
-            }
+            if (!hit.collider.GetComponent<MoveMonsters>().enabled)
+                return;
+
+            hit.collider.GetComponent<MoveMonsters>().enabled = false;
+            EnableLinkPreview(true);
+            _objectTake = hit.collider.gameObject;
+            _isTake = true;
         }
         else if (ctx.canceled && _objectTake != null)
         {
@@ -57,6 +74,7 @@ public class TakeObject : MonoBehaviour
                 _objectTake.GetComponent<SpriteRenderer>().color = Color.white;
                 _objectTake.GetComponent<SpriteRenderer>().sortingOrder = 0;
             }
+            EnableLinkPreview(false);
             _objectTake = null;
             _isTake = false;
         }
@@ -72,16 +90,16 @@ public class TakeObject : MonoBehaviour
     {
         Vector3 position = _camera.ScreenToWorldPoint(Input.mousePosition);
         position.z = 0;
-        node = Physics2D.OverlapCircleAll(position, _radiusSphere);
-        SortCollider(node, _objectTake.transform.position);
+        _node = Physics2D.OverlapCircleAll(position, _radiusSphere);
+        SortCollider(_node, _objectTake.transform.position);
 
         List<Collider2D> closestNode = new();
-        for (int i = 0; i < node.Length; i++)
+        for (int i = 0; i < _node.Length; i++)
         {
-            Collider2D[] verif = Physics2D.OverlapCircleAll(position, 0.5f);
-            if (node[i].TryGetComponent(out Link link) && link._links.Count > 0 && closestNode.Count < 2 && verif.Length < 2)
+            Collider2D[] verif = Physics2D.OverlapCircleAll(position, _radiusSphereVerif);
+            if (_node[i].TryGetComponent(out Link link) && link._links.Count > 0 && closestNode.Count < _numberLink && verif.Length <= 1)
             {
-                closestNode.Add(node[i]);
+                closestNode.Add(_node[i]);
             }
         }
 
@@ -97,22 +115,23 @@ public class TakeObject : MonoBehaviour
             _objectTake.GetComponent<Link>()._links.Add(closestNode[i].transform);
             closestNode[i].GetComponent<Link>()._links.Add(_objectTake.transform);
 
-            CreateLink(closestNode[i]);
+            GameObject link = Instantiate(_prefabLink);
+            SetLink(closestNode[i], link);
         }
     }
-    private void CreateLink(Collider2D closestNode)
+    private void SetLink(Collider2D closestNode, GameObject linkPrefab)
     {
         //Set position and scale
         Vector3 newPos = (_objectTake.transform.position - closestNode.transform.position) / 2 + closestNode.transform.position;
-        GameObject link = Instantiate(prefabLink);
-        link.transform.position = newPos;
-        float scaleX = Vector2.Distance(closestNode.transform.position, _objectTake.transform.position) - link.transform.localScale.x;
-        link.transform.localScale += new Vector3(scaleX,0, 0);
+        linkPrefab.transform.position = newPos;
+
+        float scaleX = Vector2.Distance(closestNode.transform.position, _objectTake.transform.position) - linkPrefab.transform.localScale.x;
+        linkPrefab.transform.localScale += new Vector3(scaleX,0, 0);
 
         //Rotate
-        Vector3 dir = _objectTake.transform.position - link.transform.position;
+        Vector3 dir = _objectTake.transform.position - linkPrefab.transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        link.transform.rotation = Quaternion.AngleAxis(angle, new Vector3(0, link.transform.rotation.y, 1));
+        linkPrefab.transform.rotation = Quaternion.AngleAxis(angle, new Vector3(0, linkPrefab.transform.rotation.y, 1));
     }
 
     private void SortCollider(Collider2D[] node, Vector2 posObj)
@@ -127,6 +146,13 @@ public class TakeObject : MonoBehaviour
                     (node[j + 1], node[j]) = (node[j], node[j + 1]);
                 }
             }
+        }
+    }
+    private void EnableLinkPreview(bool state)
+    {
+        for (int i = 0; i < _linkPreview.Count; i++)
+        {
+            _linkPreview[i].SetActive(state);
         }
     }
 }
