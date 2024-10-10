@@ -16,7 +16,7 @@ public class MoveMonsters : MonoBehaviour
     }
     private void MoveToNextBase()
     {
-        _transform.position = Vector3.MoveTowards(_transform.position, _currentNode.position, _speed * Time.fixedDeltaTime);
+        _transform.position = Vector2.MoveTowards(_transform.position, _currentNode.position, _speed * Time.fixedDeltaTime);
         if (_transform.position == _currentNode.position)
         {
             List<Transform> _links = _currentNode.GetComponent<List_Link>()._links;

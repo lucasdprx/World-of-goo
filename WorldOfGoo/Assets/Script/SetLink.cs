@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SetLink : MonoBehaviour
@@ -9,6 +10,20 @@ public class SetLink : MonoBehaviour
 
     [SerializeField] private int _numberLink;
     [SerializeField] private float _frequencyLink;
+
+    [SerializeField] private GameObject _linkVisual;
+    [SerializeField] private GameObject _linkVisualPreview;
+
+    private List<GameObject> _listLinkPreview = new();
+    private void Start()
+    {
+        for (int i = 0; i < _numberLink; i++)
+        {
+            GameObject linkPreview = Instantiate(_linkVisualPreview);
+            _listLinkPreview.Add(linkPreview);
+        }
+        EnableLinkPreview(false);
+    }
 
     public void AddLink(GameObject objTake)
     {
@@ -36,6 +51,11 @@ public class SetLink : MonoBehaviour
             joint.connectedBody = node[i].GetComponent<Rigidbody2D>();
             joint.frequency = _frequencyLink;
             joint.autoConfigureDistance = false;
+
+            //Add LinkVisual
+            GameObject linkVisual = Instantiate(_linkVisual);
+            linkVisual.GetComponent<LinkVisual>().node1 = objTake.transform;
+            linkVisual.GetComponent<LinkVisual>().node2 = node[i].transform;
         }
 
         objTake.layer = 7;
@@ -62,18 +82,29 @@ public class SetLink : MonoBehaviour
             }
         }
     }
-    //private void SetTransformLink(Collider2D closestNode, GameObject linkPrefab, GameObject objTake)
-    //{
-    //    //Set position and scale
-    //    Vector3 newPos = (objTake.transform.position - closestNode.transform.position) / 2 + closestNode.transform.position;
-    //    linkPrefab.transform.position = newPos;
+    public void AddLinkPreview(GameObject objTake)
+    {
+        Vector2 position = _camera.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D[] node = Physics2D.OverlapCircleAll(position, _radiusSphere, 1 << LayerMask.NameToLayer("Node"));
+        SortCollider(node, objTake.transform.position);
+        if (Physics2D.OverlapCircleAll(position, _radiusSphereVerif).Length > 1 || node.Length < 2)
+        {
+            EnableLinkPreview(false);
+            return;
+        }
 
-    //    float scaleX = Vector2.Distance(closestNode.transform.position, objTake.transform.position) - linkPrefab.transform.localScale.x;
-    //    linkPrefab.transform.localScale += new Vector3(scaleX, 0, 0);
-
-    //    //Rotate
-    //    Vector3 dir = objTake.transform.position - linkPrefab.transform.position;
-    //    float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-    //    linkPrefab.transform.rotation = Quaternion.AngleAxis(angle, new Vector3(0, linkPrefab.transform.rotation.y, 1));
-    //}
+        for (int i = 0; i < _numberLink; i++)
+        {
+            _listLinkPreview[i].SetActive(true);
+            _listLinkPreview[i].GetComponent<LinkVisual>().node1 = node[i].transform;
+            _listLinkPreview[i].GetComponent<LinkVisual>().node2 = objTake.transform;
+        }
+    }
+    public void EnableLinkPreview(bool enable)
+    {
+        for (int i = 0; i < _listLinkPreview.Count; i++)
+        {
+            _listLinkPreview[i].SetActive(enable);
+        }
+    }
 }

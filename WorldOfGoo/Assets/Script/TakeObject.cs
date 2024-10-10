@@ -21,6 +21,7 @@ public class TakeObject : MonoBehaviour
         Vector3 position = _camera.ScreenToWorldPoint(Input.mousePosition);
         position.z = 0;
         _objectTake.transform.position = position;
+        _setLink.AddLinkPreview(_objectTake);
     }
 
     public void LeftClick(InputAction.CallbackContext ctx)
