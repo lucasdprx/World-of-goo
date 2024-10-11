@@ -3,8 +3,6 @@ using UnityEngine.InputSystem;
 
 public class TakeObject : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
-
     [SerializeField] private SetLink _setLink;
 
     private GameObject _objectTake;
@@ -18,17 +16,18 @@ public class TakeObject : MonoBehaviour
     }
     public void FollowMouse()
     {
-        Vector3 position = _camera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         position.z = 0;
         _objectTake.transform.position = position;
-        _setLink.AddLinkPreview(_objectTake);
+       if (_objectTake != null)
+            _setLink.AddLinkPreview(_objectTake);
     }
 
     public void LeftClick(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            RaycastHit2D hit = Physics2D.Raycast(_camera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
             if (hit.collider == null || hit.collider.gameObject.layer != 6)
                 return;

@@ -16,10 +16,11 @@ public class LinkVisual : MonoBehaviour
     }
     private void SetTransformLink()
     {
-        //Set position and scale
+        //Set position
         Vector3 newPos = (node1.position - node2.position) / 2 + node2.position;
         _transform.position = newPos;
 
+        //Set scale
         float scaleX = Vector2.Distance(node1.position, node2.position) - _transform.localScale.x;
         _transform.localScale += new Vector3(scaleX, 0, 0);
 

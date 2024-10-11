@@ -13,7 +13,6 @@ public class SetLink : MonoBehaviour
 
     [SerializeField] private GameObject _linkVisual;
     [SerializeField] private GameObject _linkVisualPreview;
-
     private List<GameObject> _listLinkPreview = new();
     private void Start()
     {
@@ -26,7 +25,7 @@ public class SetLink : MonoBehaviour
     }
 
     public void AddLink(GameObject objTake)
-    {
+    { 
         Vector2 position = _camera.ScreenToWorldPoint(Input.mousePosition);
         Collider2D[] node = Physics2D.OverlapCircleAll(position, _radiusSphere, 1 << LayerMask.NameToLayer("Node"));
         SortCollider(node, objTake.transform.position);
@@ -92,9 +91,15 @@ public class SetLink : MonoBehaviour
             EnableLinkPreview(false);
             return;
         }
-
-        for (int i = 0; i < _numberLink; i++)
+        for (int i = _numberLink; i > node.Length; i--)
         {
+            _listLinkPreview[i - 1].SetActive(false);
+        }
+        for (int i = 0; i < node.Length; i++)
+        {
+            if (i >= _numberLink)
+                break;
+
             _listLinkPreview[i].SetActive(true);
             _listLinkPreview[i].GetComponent<LinkVisual>().node1 = node[i].transform;
             _listLinkPreview[i].GetComponent<LinkVisual>().node2 = objTake.transform;
