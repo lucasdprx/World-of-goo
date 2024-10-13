@@ -650,11 +650,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3720847082229057779, guid: bfee1ddd03f7697468aad8972e116bf4, type: 3}
   m_PrefabInstance: {fileID: 407760573}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &430255146 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2251326682812796586, guid: f9212e8e41dccac49b9d28c445b26510, type: 3}
-  m_PrefabInstance: {fileID: 415715774945819207}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,96 +1069,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9155846058114978857, guid: f9212e8e41dccac49b9d28c445b26510, type: 3}
   m_PrefabInstance: {fileID: 415715774945819207}
   m_PrefabAsset: {fileID: 0}
---- !u!231 &1031438553
-SpringJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430255146}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
-  m_Distance: 5.3851647
-  m_DampingRatio: 0
-  m_Frequency: 1
---- !u!231 &1031438554
-SpringJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430255146}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
-  m_Distance: 5.3851647
-  m_DampingRatio: 0
-  m_Frequency: 1
---- !u!231 &1031438555
-SpringJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430255146}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 1667755123}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
-  m_Distance: 2
-  m_DampingRatio: 0
-  m_Frequency: 1
---- !u!50 &1031438556
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430255146}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1041489537
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,19 +2656,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2251326682812796586, guid: f9212e8e41dccac49b9d28c445b26510, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1031438556}
-    - targetCorrespondingSourceObject: {fileID: 2251326682812796586, guid: f9212e8e41dccac49b9d28c445b26510, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1031438555}
-    - targetCorrespondingSourceObject: {fileID: 2251326682812796586, guid: f9212e8e41dccac49b9d28c445b26510, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1031438554}
-    - targetCorrespondingSourceObject: {fileID: 2251326682812796586, guid: f9212e8e41dccac49b9d28c445b26510, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1031438553}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9212e8e41dccac49b9d28c445b26510, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
