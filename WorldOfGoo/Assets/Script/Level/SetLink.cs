@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SetLink : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
+    private Camera _camera;
 
     [SerializeField] private float _radiusSphere;
     [SerializeField] private float _radiusSphereVerif;
@@ -14,6 +14,7 @@ public class SetLink : MonoBehaviour
     [SerializeField] private GameObject _linkVisual;
     [SerializeField] private GameObject _linkVisualPreview;
     private List<GameObject> _listLinkPreview = new();
+    private int _numberSkull;
     private void Start()
     {
         for (int i = 0; i < _numberLink; i++)
@@ -22,6 +23,7 @@ public class SetLink : MonoBehaviour
             _listLinkPreview.Add(linkPreview);
         }
         EnableLinkPreview(false);
+        _camera = Camera.main;
     }
 
     public void AddLink(GameObject objTake)
@@ -30,7 +32,7 @@ public class SetLink : MonoBehaviour
         Collider2D[] node = Physics2D.OverlapCircleAll(position, _radiusSphere, 1 << LayerMask.NameToLayer("Node"));
         SortCollider(node, objTake.transform.position);
 
-        if (node.Length < 2 || Physics2D.OverlapCircleAll(position, _radiusSphereVerif).Length > 1)
+        if (node.Length < 2 || Physics2D.OverlapCircleAll(position, _radiusSphereVerif, LayerMask.GetMask("Node", "Default", "Object")).Length > 1)
         {
             ResetObject(objTake);
             return;
@@ -59,6 +61,8 @@ public class SetLink : MonoBehaviour
 
         objTake.layer = 7;
         objTake.GetComponent<Collider2D>().isTrigger = false;
+        _numberSkull++;
+        objTake.GetComponent<MoveMonsters>()._indexSkull = _numberSkull;
     }
     private void ResetObject(GameObject obj)
     {
@@ -86,7 +90,7 @@ public class SetLink : MonoBehaviour
         Vector2 position = _camera.ScreenToWorldPoint(Input.mousePosition);
         Collider2D[] node = Physics2D.OverlapCircleAll(position, _radiusSphere, 1 << LayerMask.NameToLayer("Node"));
         SortCollider(node, objTake.transform.position);
-        if (Physics2D.OverlapCircleAll(position, _radiusSphereVerif).Length > 1 || node.Length < 2)
+        if (Physics2D.OverlapCircleAll(position, _radiusSphereVerif, LayerMask.GetMask("Node", "Default", "Object")).Length > 1 || node.Length < 2)
         {
             EnableLinkPreview(false);
             return;

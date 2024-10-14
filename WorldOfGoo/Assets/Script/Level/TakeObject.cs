@@ -5,8 +5,15 @@ public class TakeObject : MonoBehaviour
 {
     [SerializeField] private SetLink _setLink;
 
+    private Camera _camera;
+
     private GameObject _objectTake;
     private bool _isTake = false;
+
+    private void Start()
+    {
+        _camera = Camera.main;
+    }
     void Update()
     {
         if (_isTake)
@@ -16,8 +23,7 @@ public class TakeObject : MonoBehaviour
     }
     public void FollowMouse()
     {
-        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        position.z = 0;
+        Vector2 position = _camera.ScreenToWorldPoint(Input.mousePosition);
         _objectTake.transform.position = position;
        if (_objectTake != null)
             _setLink.AddLinkPreview(_objectTake);

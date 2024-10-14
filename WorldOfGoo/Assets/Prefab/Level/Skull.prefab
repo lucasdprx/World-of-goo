@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6173465149371431676}
   - component: {fileID: 238700673759058995}
   m_Layer: 6
-  m_Name: Monsters
+  m_Name: Skull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 4
   _currentNode: {fileID: 0}
+  _endGame: 0
 --- !u!114 &238700673759058995
 MonoBehaviour:
   m_ObjectHideFlags: 0

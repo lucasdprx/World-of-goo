@@ -3,12 +3,14 @@ using UnityEngine;
 public class LinkVisual : MonoBehaviour
 {
     private Transform _transform;
+    private SpriteRenderer _spriteRenderer;
 
     public Transform node1;
     public Transform node2;
     private void Start()
     {
         _transform = transform;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
@@ -28,5 +30,10 @@ public class LinkVisual : MonoBehaviour
         Vector3 dir = node1.position - _transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         _transform.rotation = Quaternion.AngleAxis(angle, new Vector3(0, _transform.rotation.y, 1));
+
+        ////Set color
+        //float color = 1 - (_transform.localScale.x / 2.5f - 1);
+        //if (_transform.localScale.x > 2.5f)
+        //    _spriteRenderer.color = new Color(_spriteRenderer.color.r, color, color);
     }
 }
