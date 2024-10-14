@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveMonsters : MonoBehaviour
 {
-    [SerializeField] private int _speed;
+    public int _speed;
     private Transform _transform;
     public Transform _currentNode;
     [HideInInspector] public bool _endGame;
@@ -24,6 +24,7 @@ public class MoveMonsters : MonoBehaviour
         {
             if (_currentNode.TryGetComponent(out MoveMonsters monsters) && monsters._indexSkull == EndLevel._lastSkull)
             {
+                EndLevel.Instance.SetTextScore();
                 gameObject.SetActive(false);
                 return;
             }
@@ -56,6 +57,8 @@ public class MoveMonsters : MonoBehaviour
             }
             else
                 _currentNode = _Listlinks[Random.Range(0, _Listlinks.Count)];
+            
+            _transform.parent = _currentNode.transform;
         }
     }
 }
