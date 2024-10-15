@@ -22,7 +22,7 @@ public class MoveMonsters : MonoBehaviour
         _transform.position = Vector2.MoveTowards(_transform.position, _currentNode.position, _speed * Time.fixedDeltaTime);
         if (_transform.position == _currentNode.position && _currentNode.TryGetComponent(out List_Link links))
         {
-            if (_currentNode.TryGetComponent(out MoveMonsters monsters) && monsters._indexSkull == EndLevel._lastSkull)
+            if (_currentNode.TryGetComponent(out MoveMonsters monsters) && monsters._indexSkull == EndLevel.Instance._lastSkull)
             {
                 EndLevel.Instance.SetTextScore();
                 gameObject.SetActive(false);

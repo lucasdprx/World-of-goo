@@ -28,7 +28,7 @@ public class LinkVisual : MonoBehaviour
 
         //Rotate
         Vector3 dir = node1.position - _transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;   //Look at on node 1
         _transform.rotation = Quaternion.AngleAxis(angle, new Vector3(0, _transform.rotation.y, 1));
 
         ////Set color

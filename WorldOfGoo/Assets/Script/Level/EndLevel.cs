@@ -11,12 +11,13 @@ public class EndLevel : MonoBehaviour
     [SerializeField] private GameObject _uiEnd;
     
     private int score;
-    public static int _lastSkull = -99;
+    public int _lastSkull = -99;
     public static EndLevel Instance;
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -72,6 +73,6 @@ public class EndLevel : MonoBehaviour
     }
     public void NextLevel()
     {
-        //scene ++;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
