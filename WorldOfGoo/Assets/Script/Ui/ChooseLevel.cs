@@ -35,7 +35,6 @@ public class ChooseLevel : MonoBehaviour
         for (int i = 0; i < _listButtonLevel.Count; i++)
         {
             _listButtonLevel[i].interactable = PlayerPrefs.HasKey("Level " + (i + 1));
-            print(PlayerPrefs.HasKey("Level " + (i + 1)));
         }
     }
     public void EnterLevel(int indexScene)

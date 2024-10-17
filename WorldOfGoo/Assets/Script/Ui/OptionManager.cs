@@ -9,16 +9,21 @@ public class OptionManager : MonoBehaviour
 
     [SerializeField] private Slider _sliderSFX;
     [SerializeField] private Slider _sliderMusic;
-    void Start()
+    void OnEnable()
     {
         _toggleFullScreen.isOn = Screen.fullScreen;
 
         if (PlayerPrefs.HasKey("SFX"))
-            _sliderSFX.value = PlayerPrefs.GetInt("SFX");
+            _sliderSFX.value = PlayerPrefs.GetFloat("SFX");
 
         if (PlayerPrefs.HasKey("Music"))
-            _sliderMusic.value = PlayerPrefs.GetInt("Music");
+            _sliderMusic.value = PlayerPrefs.GetFloat("Music");
 
+    }
+    private void OnDisable()
+    {
+        PlayerPrefs.SetFloat("Music", _sliderMusic.value);
+        PlayerPrefs.SetFloat("SFX", _sliderSFX.value);
     }
 
     public void SetFullScreen(bool isFullScreen)

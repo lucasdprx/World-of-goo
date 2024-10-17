@@ -62,7 +62,9 @@ public class SetLink : MonoBehaviour
             linkVisual.GetComponent<LinkVisual>().node2 = node[i].transform;
         }
 
-        objTake.GetComponentInChildren<SpriteRenderer>().sprite = _spriteOs;
+        SpriteRenderer spriteRenderer = objTake.GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer.sprite = _spriteOs;
+        spriteRenderer.sortingOrder -= 1; 
         objTake.transform.GetChild(0).localScale /= 1.5f;
         objTake.layer = 7;
         objTake.GetComponent<Collider2D>().isTrigger = false;
