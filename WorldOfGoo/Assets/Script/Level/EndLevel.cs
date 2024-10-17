@@ -41,6 +41,9 @@ public class EndLevel : MonoBehaviour
                 score++;
             }
         }
+        if (PlayerPrefs.GetInt("Level " + SceneManager.GetActiveScene().buildIndex) <= score)
+            PlayerPrefs.SetInt("Level " + SceneManager.GetActiveScene().buildIndex, score);
+        
         if (score <= 0)
         {
             _textScore.text = "-1";

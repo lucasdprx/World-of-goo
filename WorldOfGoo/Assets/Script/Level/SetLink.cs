@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ public class SetLink : MonoBehaviour
     [SerializeField] private GameObject _linkVisualPreview;
     private List<GameObject> _listLinkPreview = new();
     private int _numberSkull;
+
+    [SerializeField] private Sprite _spriteOs;
     private void Start()
     {
         for (int i = 0; i < _numberLink; i++)
@@ -59,10 +62,14 @@ public class SetLink : MonoBehaviour
             linkVisual.GetComponent<LinkVisual>().node2 = node[i].transform;
         }
 
+        objTake.GetComponentInChildren<SpriteRenderer>().sprite = _spriteOs;
+        objTake.transform.GetChild(0).localScale /= 1.5f;
         objTake.layer = 7;
         objTake.GetComponent<Collider2D>().isTrigger = false;
         _numberSkull++;
         objTake.GetComponent<MoveMonsters>()._indexSkull = _numberSkull;
+        objTake.GetComponent<Rigidbody2D>().freezeRotation = true;
+        EnableLinkPreview(false);
     }
     private void ResetObject(GameObject obj)
     {
@@ -104,10 +111,15 @@ public class SetLink : MonoBehaviour
             if (i >= _numberLink)
                 break;
 
-            _listLinkPreview[i].SetActive(true);
             _listLinkPreview[i].GetComponent<LinkVisual>().node1 = node[i].transform;
             _listLinkPreview[i].GetComponent<LinkVisual>().node2 = objTake.transform;
+            StartCoroutine(DisableLinkOneFrame(_listLinkPreview[i]));
         }
+    }
+    private IEnumerator DisableLinkOneFrame(GameObject link)
+    {
+        yield return new WaitForEndOfFrame();
+        link.SetActive(true);
     }
     public void EnableLinkPreview(bool enable)
     {

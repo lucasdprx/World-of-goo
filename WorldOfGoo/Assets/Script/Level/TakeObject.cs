@@ -34,7 +34,6 @@ public class TakeObject : MonoBehaviour
         if (ctx.performed)
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
             if (hit.collider == null || hit.collider.gameObject.layer != 6)
                 return;
 

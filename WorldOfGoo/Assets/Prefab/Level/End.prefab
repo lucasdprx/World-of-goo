@@ -251,7 +251,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 71
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
   m_FlipX: 0
@@ -323,6 +323,7 @@ MonoBehaviour:
   _textScore: {fileID: 3526318278526765632}
   _textScoreEnd: {fileID: 4025585733384507913}
   _uiEnd: {fileID: 1363056376230722438}
+  _lastSkull: -99
 --- !u!1 &2605560192612799981
 GameObject:
   m_ObjectHideFlags: 0
