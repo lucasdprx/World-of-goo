@@ -34,6 +34,8 @@ public class EndLevel : MonoBehaviour
     {
         for (int i = 0; i < monsters.Count; i++)
         {
+            if (monsters[i] == null)
+                continue;
             if (monsters[i].enabled)
             {
                 monsters[i]._speed *= 2;
