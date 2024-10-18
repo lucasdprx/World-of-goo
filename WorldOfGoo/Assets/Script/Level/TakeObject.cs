@@ -7,8 +7,9 @@ public class TakeObject : MonoBehaviour
 
     private Camera _camera;
 
-    private GameObject _objectTake;
-    private bool _isTake = false;
+    [HideInInspector] public GameObject _objectTake;
+    [HideInInspector] public bool _isTake = false;
+    [SerializeField] private LayerMask _layerMask;
 
     private void Start()
     {
@@ -33,7 +34,7 @@ public class TakeObject : MonoBehaviour
     {
         if (ctx.performed)
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(_camera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, (_layerMask));
             if (hit.collider == null || hit.collider.gameObject.layer != 6)
                 return;
 

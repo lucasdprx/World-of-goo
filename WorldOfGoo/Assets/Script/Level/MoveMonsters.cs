@@ -19,6 +19,18 @@ public class MoveMonsters : MonoBehaviour
     }
     private void MoveToNextBase()
     {
+        if (_currentNode == null)
+        {
+            for (int i = 0; i < List_Monsters.Instance._listMonsters.Count; i++)
+            {
+                if (List_Monsters.Instance._listMonsters[i]._currentNode != null)
+                {
+                    _currentNode = List_Monsters.Instance._listMonsters[i]._currentNode;
+                    break;
+                } 
+            }
+            return;
+        } 
         _transform.position = Vector2.MoveTowards(_transform.position, _currentNode.position, _speed * Time.fixedDeltaTime);
         if (_transform.position == _currentNode.position && _currentNode.TryGetComponent(out List_Link links))
         {
@@ -29,6 +41,7 @@ public class MoveMonsters : MonoBehaviour
                 return;
             }
             List<Transform> _Listlinks = links._links;
+            DeleteNull(_Listlinks);
 
             if (_endGame)
             {
@@ -58,7 +71,15 @@ public class MoveMonsters : MonoBehaviour
             else
                 _currentNode = _Listlinks[Random.Range(0, _Listlinks.Count)];
             
-            _transform.parent = _currentNode.transform;
+            //_transform.parent = _currentNode.transform;
+        }
+    }
+    private void DeleteNull(List<Transform> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i] == null)
+                list.RemoveAt(i);
         }
     }
 }

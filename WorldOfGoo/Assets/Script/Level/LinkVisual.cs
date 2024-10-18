@@ -7,6 +7,8 @@ public class LinkVisual : MonoBehaviour
 
     public Transform node1;
     public Transform node2;
+
+    [HideInInspector] public SpringJoint2D _joint;
     private void Start()
     {
         _transform = transform;

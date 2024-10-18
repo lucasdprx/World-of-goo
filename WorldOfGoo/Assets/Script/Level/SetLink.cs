@@ -15,9 +15,11 @@ public class SetLink : MonoBehaviour
     [SerializeField] private GameObject _linkVisual;
     [SerializeField] private GameObject _linkVisualPreview;
     private List<GameObject> _listLinkPreview = new();
+    [HideInInspector] public List<GameObject> _listLink = new();
     private int _numberSkull;
 
     [SerializeField] private Sprite _spriteOs;
+    [SerializeField] private LayerMask _layerMask;
     private void Start()
     {
         for (int i = 0; i < _numberLink; i++)
@@ -35,7 +37,7 @@ public class SetLink : MonoBehaviour
         Collider2D[] node = Physics2D.OverlapCircleAll(position, _radiusSphere, 1 << LayerMask.NameToLayer("Node"));
         SortCollider(node, objTake.transform.position);
 
-        if (node.Length < 2 || Physics2D.OverlapCircleAll(position, _radiusSphereVerif, LayerMask.GetMask("Node", "Default", "Object")).Length > 1)
+        if (node.Length < 2 || Physics2D.OverlapCircleAll(position, _radiusSphereVerif, _layerMask).Length > 0)
         {
             ResetObject(objTake);
             return;
@@ -55,11 +57,15 @@ public class SetLink : MonoBehaviour
             joint.connectedBody = node[i].GetComponent<Rigidbody2D>();
             joint.frequency = _frequencyLink;
             joint.autoConfigureDistance = false;
+            //joint.enableCollision = true;
 
             //Add LinkVisual
             GameObject linkVisual = Instantiate(_linkVisual);
-            linkVisual.GetComponent<LinkVisual>().node1 = objTake.transform;
-            linkVisual.GetComponent<LinkVisual>().node2 = node[i].transform;
+            _listLink.Add(linkVisual);
+            LinkVisual link = linkVisual.GetComponent<LinkVisual>();
+            link.node1 = objTake.transform;
+            link.node2 = node[i].transform;
+            link._joint = joint;
         }
 
         SpriteRenderer spriteRenderer = objTake.GetComponentInChildren<SpriteRenderer>();
@@ -73,7 +79,7 @@ public class SetLink : MonoBehaviour
         objTake.GetComponent<Rigidbody2D>().freezeRotation = true;
         EnableLinkPreview(false);
     }
-    private void ResetObject(GameObject obj)
+    public void ResetObject(GameObject obj)
     {
         MoveMonsters moveMonsters = obj.GetComponent<MoveMonsters>();
         obj.transform.position = moveMonsters._currentNode.position;
@@ -99,7 +105,7 @@ public class SetLink : MonoBehaviour
         Vector2 position = _camera.ScreenToWorldPoint(Input.mousePosition);
         Collider2D[] node = Physics2D.OverlapCircleAll(position, _radiusSphere, 1 << LayerMask.NameToLayer("Node"));
         SortCollider(node, objTake.transform.position);
-        if (Physics2D.OverlapCircleAll(position, _radiusSphereVerif, LayerMask.GetMask("Node", "Default", "Object")).Length > 1 || node.Length < 2)
+        if (Physics2D.OverlapCircleAll(position, _radiusSphereVerif, _layerMask).Length > 0 || node.Length < 2)
         {
             EnableLinkPreview(false);
             return;
